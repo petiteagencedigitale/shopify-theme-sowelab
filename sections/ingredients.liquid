@@ -1,0 +1,76 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="page-width ingredients">
+  {% for ingredient in shop.metaobjects.ingredient.values %}
+    <div class="ingredient">
+      <div class="ingredient-image">{{ ingredient.ingredient_picture | img_tag }}</div>
+        <h2 class="ingredient-title">{{ ingredient.oil_name_title | link_to: ingredient.system.url }}</h2>
+          <p class="ingredient-paragraph">{{ ingredient.ingredient_short_description }}</p>  
+{% comment %}      <h3>Ingredient in ...</h3> {% endcomment %}
+      <div class="ingredient-products">
+        {% for ingredient in shop.metaobjects.ingredient.values %}
+          <a href="" class="ingredientr-product"></a>
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+<style>
+{% comment %}
+  .ingredients {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    display: flex;
+    justify-content: center;
+    column-gap: 10px;
+  }
+
+Truc ci-dessous chopé sur la page ingrédients
+{% endcomment %}
+
+@media screen and (min-width: 750px)
+.ingredients {
+    grid-template-columns: 1fr 1fr;
+    column-gap: var(--grid-desktop-horizontal-spacing);
+    row-gap: var(--grid-desktop-vertical-spacing);
+}
+ 
+  .creator {
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.23) 0px 2px 5px 5px;
+    padding: 10px;
+  }
+  .creator-products {
+    display: flex;
+    column-gap: 10px;
+    justify-content: center;
+  }
+  .creator-product {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-decoration: none;
+    color: rgb(var(--color-foreground));
+  }
+
+</style>
+
+{% schema %}
+  {
+    "name": "Ingredients",
+    "settings": []
+  }
+{% endschema %}
